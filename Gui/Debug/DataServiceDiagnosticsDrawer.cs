@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility;
+﻿using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using ImGuiNET;
 using OtterGui;
@@ -19,7 +19,7 @@ public class DataServiceDiagnosticsDrawer(ServiceManager manager) : IGameDataDra
     /// <inheritdoc/>
     public void Draw()
     {
-        ImGui.InputTextWithHint("##filter", "Filter...", ref _filter, 64);
+        ImGui.InputTextWithHint("##filter", "筛选...", ref _filter, 64);
         DrawSortCombo();
         using var table = ImRaii.Table("services", 5, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.RowBg);
         if (!table)
@@ -70,9 +70,9 @@ public class DataServiceDiagnosticsDrawer(ServiceManager manager) : IGameDataDra
     /// <summary> Sort the table. </summary>
     private void DrawSortCombo()
     {
-        string[] names = ["Name", "Time", "Memory", "Items"];
+        string[] names = ["名称", "事件", "Memory", "Items"];
 
-        using var combo = ImRaii.Combo("Sort Order", names[_orderBy]);
+        using var combo = ImRaii.Combo("排序顺序", names[_orderBy]);
         if (!combo)
             return;
 

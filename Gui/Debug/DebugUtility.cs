@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility;
+﻿using Dalamud.Interface.Utility;
 using ImGuiNET;
 using OtterGui;
 using OtterGui.Raii;
@@ -21,7 +21,7 @@ public static class DebugUtility
             return;
 
         using var _           = ImRaii.PushId(label);
-        var       resetScroll = ImGui.InputTextWithHint("##filter", "Filter...", ref filter, 256);
+        var       resetScroll = ImGui.InputTextWithHint("##filter", "筛选...", ref filter, 256);
         var       height      = ImGui.GetTextLineHeightWithSpacing() + 2 * ImGui.GetStyle().CellPadding.Y;
         using var table = ImRaii.Table("##table", 2, ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.BordersOuter,
             new Vector2(-1, 10 * height));

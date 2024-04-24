@@ -1,3 +1,5 @@
+﻿using System.Collections.Frozen;
+
 namespace Penumbra.GameData.Enums;
 
 /// <summary> Equip Slot, mostly as defined by the games EquipSlotCategory. </summary>
@@ -120,29 +122,29 @@ public static class EquipSlotExtensions
     public static string ToName(this EquipSlot value)
         => value switch
         {
-            EquipSlot.Head              => "Head",
-            EquipSlot.Hands             => "Hands",
-            EquipSlot.Legs              => "Legs",
-            EquipSlot.Feet              => "Feet",
-            EquipSlot.Body              => "Body",
-            EquipSlot.Ears              => "Earrings",
-            EquipSlot.Neck              => "Necklace",
-            EquipSlot.RFinger           => "Right Ring",
-            EquipSlot.LFinger           => "Left Ring",
-            EquipSlot.Wrists            => "Bracelets",
-            EquipSlot.MainHand          => "Primary Weapon",
-            EquipSlot.OffHand           => "Secondary Weapon",
-            EquipSlot.Belt              => "Belt",
-            EquipSlot.BothHand          => "Primary Weapon",
-            EquipSlot.HeadBody          => "Head and Body",
-            EquipSlot.BodyHandsLegsFeet => "Costume",
-            EquipSlot.SoulCrystal       => "Soul Crystal",
-            EquipSlot.LegsFeet          => "Bottom",
-            EquipSlot.FullBody          => "Costume",
-            EquipSlot.BodyHands         => "Top",
-            EquipSlot.BodyLegsFeet      => "Costume",
-            EquipSlot.All               => "Costume",
-            _                           => "Unknown",
+            EquipSlot.Head              => "头部",
+            EquipSlot.Hands             => "手臂",
+            EquipSlot.Legs              => "腿部",
+            EquipSlot.Feet              => "脚部",
+            EquipSlot.Body              => "身体",
+            EquipSlot.Ears              => "耳环",
+            EquipSlot.Neck              => "项链",
+            EquipSlot.RFinger           => "右手戒指",
+            EquipSlot.LFinger           => "左手戒指",
+            EquipSlot.Wrists            => "手镯",
+            EquipSlot.MainHand          => "主手",
+            EquipSlot.OffHand           => "副手",
+            EquipSlot.Belt              => "腰带",
+            EquipSlot.BothHand          => "双手武器",
+            EquipSlot.HeadBody          => "头部+身体",
+            EquipSlot.BodyHandsLegsFeet => "身体+手臂+腿部+脚部",
+            EquipSlot.SoulCrystal       => "灵魂水晶",
+            EquipSlot.LegsFeet          => "腿部+脚部",
+            EquipSlot.FullBody          => "身体+手臂+腿部",
+            EquipSlot.BodyHands         => "身体+手臂",
+            EquipSlot.BodyLegsFeet      => "身体+腿部+脚部",
+            EquipSlot.All               => "全部（比如幽灵套装）",
+            _                           => "未知",
         };
 
     /// <summary> Returns true for the 5 primary equipment slots. </summary>
@@ -223,18 +225,17 @@ public static class EquipSlotExtensions
 public static partial class Names
 {
     /// <summary> A dictionary converting path suffices into EquipSlot. </summary>
-    // TODO: FrozenDictionary.
-    public static readonly Dictionary<string, EquipSlot> SuffixToEquipSlot = new()
-    {
-        { EquipSlot.Head.ToSuffix(), EquipSlot.Head },
-        { EquipSlot.Hands.ToSuffix(), EquipSlot.Hands },
-        { EquipSlot.Legs.ToSuffix(), EquipSlot.Legs },
-        { EquipSlot.Feet.ToSuffix(), EquipSlot.Feet },
-        { EquipSlot.Body.ToSuffix(), EquipSlot.Body },
-        { EquipSlot.Ears.ToSuffix(), EquipSlot.Ears },
-        { EquipSlot.Neck.ToSuffix(), EquipSlot.Neck },
-        { EquipSlot.RFinger.ToSuffix(), EquipSlot.RFinger },
-        { EquipSlot.LFinger.ToSuffix(), EquipSlot.LFinger },
-        { EquipSlot.Wrists.ToSuffix(), EquipSlot.Wrists },
-    };
+    public static readonly IReadOnlyDictionary<string, EquipSlot> SuffixToEquipSlot = FrozenDictionary.ToFrozenDictionary(
+    [
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Head.ToSuffix(),    EquipSlot.Head),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Hands.ToSuffix(),   EquipSlot.Hands),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Legs.ToSuffix(),    EquipSlot.Legs),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Feet.ToSuffix(),    EquipSlot.Feet),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Body.ToSuffix(),    EquipSlot.Body),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Ears.ToSuffix(),    EquipSlot.Ears),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Neck.ToSuffix(),    EquipSlot.Neck),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.RFinger.ToSuffix(), EquipSlot.RFinger),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.LFinger.ToSuffix(), EquipSlot.LFinger),
+        new KeyValuePair<string, EquipSlot>(EquipSlot.Wrists.ToSuffix(),  EquipSlot.Wrists),
+    ]);
 }

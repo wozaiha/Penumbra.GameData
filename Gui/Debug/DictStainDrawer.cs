@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility;
+﻿using Dalamud.Interface.Utility;
 using ImGuiNET;
 using OtterGui;
 using OtterGui.Raii;
@@ -23,7 +23,7 @@ public class DictStainDrawer(DictStain _stains) : IGameDataDrawer
     /// <inheritdoc/>
     public void Draw()
     {
-        var resetScroll = ImGui.InputTextWithHint("##filter", "Filter...", ref _stainFilter, 256);
+        var resetScroll = ImGui.InputTextWithHint("##filter", "筛选...", ref _stainFilter, 256);
         var height      = ImGui.GetTextLineHeightWithSpacing() + 2 * ImGui.GetStyle().CellPadding.Y;
         using var table = ImRaii.Table("##table", 4,
             ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.BordersOuter | ImGuiTableFlags.SizingFixedFit,

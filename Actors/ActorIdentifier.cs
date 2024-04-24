@@ -1,4 +1,4 @@
-using Dalamud.Game.ClientState.Objects.Enums;
+﻿using Dalamud.Game.ClientState.Objects.Enums;
 using Penumbra.GameData.Enums;
 using Penumbra.GameData.Structs;
 using Penumbra.String;
@@ -106,18 +106,18 @@ public readonly struct ActorIdentifier : IEquatable<ActorIdentifier>
         {
             case IdentifierType.Player:
             {
-                var parts = name.Split(' ', 3);
-                return parts.Length == 2 ? $"{parts[0][0]}. {parts[1][0]}." : $"{parts[0][0]}. {parts[1][0]}. {parts[2]}";
+                var parts = name.Split(' ', 2);
+                return parts.Length == 1 ? $"{parts[0][0]}*" : $"{parts[0][0]}*{parts[1]}";
             }
             case IdentifierType.Owned:
             {
-                var parts = name.Split(' ', 3);
-                return parts[2][0] == '(' ? $"{parts[0][0]}. {parts[1][0]}. {parts[2]}" : $"{parts[0][0]}. {parts[1][0]}.'s {parts[2]}";
+                var parts = name.Split('的', 2);
+                return parts.Length == 1 ? $"{parts[0][0]}*" : $"{parts[0][0]}*的{parts[1]}";
             }
             case IdentifierType.Retainer:
             {
                 var parts = name.Split(' ', 2);
-                return $"{parts[0][0]}. {parts[1]}";
+                return parts.Length == 1 ? $"{parts[0][0]}*" : $"{parts[0][0]}*{parts[1]}";
             }
         }
 
@@ -134,20 +134,20 @@ public readonly struct ActorIdentifier : IEquatable<ActorIdentifier>
                 IdentifierType.Retainer =>
                     $"{PlayerName}{Retainer switch
                     {
-                        RetainerType.Bell      => " (Bell)",
-                        RetainerType.Mannequin => " (Mannequin)",
-                        _                      => " (Retainer)",
+                        RetainerType.Bell      => " (传唤铃雇员)",
+                        RetainerType.Mannequin => " (服装模特)",
+                        _                      => " (雇员)",
                     }}",
-                IdentifierType.Owned   => $"{PlayerName}s {Kind.ToName()} {DataId} ({HomeWorld})",
+                IdentifierType.Owned   => $"{PlayerName}的{Kind.ToName()} {DataId} ({HomeWorld})",//国服匿名
                 IdentifierType.Special => ((ScreenActor)Index.Index).ToName(),
                 IdentifierType.Npc =>
                     Index == ushort.MaxValue
                         ? $"{Kind.ToName()} #{DataId}"
                         : $"{Kind.ToName()} #{DataId} at {Index}",
                 IdentifierType.UnkObject => PlayerName.IsEmpty
-                    ? $"Unknown Object at {Index}"
+                    ? $"未知对象 at {Index}"
                     : $"{PlayerName} at {Index}",
-                _ => "Invalid",
+                _ => "无效",
             };
 
     /// <summary> Obtain only the name of the actor identified. </summary>
