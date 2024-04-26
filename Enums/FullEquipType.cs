@@ -76,6 +76,9 @@ public enum FullEquipType : byte
     Brush,    // PCT
     Palette,  // PCT Off
     Whip,     // BMR TODO
+
+    ToolMainhand = 0xFE,
+    ToolOffhand  = 0xFF,
 }
 
 public static class FullEquipTypeExtensions
@@ -143,6 +146,8 @@ public static class FullEquipTypeExtensions
             FullEquipType.Sledgehammer    => true,
             FullEquipType.GardenScythe    => true,
             FullEquipType.Gig             => true,
+            FullEquipType.ToolMainhand    => true,
+            FullEquipType.ToolOffhand     => true,
             _                             => false,
         };
 
